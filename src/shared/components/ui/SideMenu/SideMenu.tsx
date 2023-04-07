@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Box,
   Drawer,
@@ -10,7 +11,7 @@ import {
 } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
-import { useUiStore } from '@/redux';
+import { useCharactersStore, useUiStore } from '@/redux';
 import { NavLinkList } from './components';
 import { navLinks } from '@/shared/utils';
 
@@ -18,7 +19,19 @@ export interface SideMenuProps {}
 
 const SideMenu: React.FC<SideMenuProps> = () => {
   const { isMenuOpen, toggleMenu } = useUiStore();
+  const { searchCharacter } = useCharactersStore();
   const isMobile = useMediaQuery('(max-width: 600px)');
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const onSearchTerm = () => {
+    const query = searchTerm.trim();
+    if (!query) return;
+
+    searchCharacter({ search: query });
+    toggleMenu();
+    setSearchTerm('');
+  };
 
   return (
     <Drawer
@@ -37,16 +50,16 @@ const SideMenu: React.FC<SideMenuProps> = () => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  // onClick={onSearchTerm}
+                  onClick={onSearchTerm}
                 >
                   <SearchOutlinedIcon />
                 </IconButton>
               </InputAdornment>
             }
             //
-            // value={searchTerm}
-            // onChange={e => setSearchTerm(e.target.value)}
-            // onKeyUp={e => e.key === 'Enter' && onSearchTerm()}
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            onKeyUp={e => e.key === 'Enter' && onSearchTerm()}
           />
         </ListItem>
 

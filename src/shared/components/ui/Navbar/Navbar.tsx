@@ -76,15 +76,16 @@ const Navbar: React.FC<NavbarProps> = () => {
               <Input
                 autoFocus
                 type="text"
-                placeholder="Buscar..."
+                placeholder="Search..."
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={() => {
                         setIsSearchVisible(false);
+
+                        !!searchTerm.trim() && searchCharacter({});
                         setSearchTerm('');
-                        searchCharacter({});
                       }}
                     >
                       <ClearOutlinedIcon />
