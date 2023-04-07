@@ -15,7 +15,7 @@ import { useMediaQuery } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
-import { useUiStore } from '@/redux';
+import { useCharactersStore, useUiStore } from '@/redux';
 import { CustomNavLink } from './components';
 import { navLinks } from '@/shared/utils';
 
@@ -23,8 +23,24 @@ export interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
   const { toggleMenu } = useUiStore();
+  const { searchCharacter } = useCharactersStore();
   const isMobile = useMediaQuery('(max-width: 600px)');
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchTerm(query);
+
+    if (!query.trim()) return;
+    searchCharacter({ search: query.trim() });
+  };
+
+  const onSearchTerm = () => {
+    if (!searchTerm.trim().length) return;
+    searchCharacter({ search: searchTerm.trim() });
+  };
 
   return (
     <AppBar>
@@ -65,7 +81,11 @@ const Navbar: React.FC<NavbarProps> = () => {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={() => setIsSearchVisible(false)}
+                      onClick={() => {
+                        setIsSearchVisible(false);
+                        setSearchTerm('');
+                        searchCharacter({});
+                      }}
                     >
                       <ClearOutlinedIcon />
                     </IconButton>
@@ -73,9 +93,9 @@ const Navbar: React.FC<NavbarProps> = () => {
                 }
                 className="fadeIn"
                 //
-                // value={searchTerm}
-                // onChange={e => setSearchTerm(e.target.value)}
-                // onKeyUp={e => e.key === 'Enter' && onSearchTerm()}
+                value={searchTerm}
+                onChange={handleSearchChange}
+                onKeyDown={e => e.key === 'Enter' && onSearchTerm()}
                 sx={{ zIndex: '999' }}
               />
             ) : (

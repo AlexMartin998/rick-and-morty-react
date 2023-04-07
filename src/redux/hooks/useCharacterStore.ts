@@ -24,6 +24,20 @@ export const useCharactersStore = () => {
     }
   };
 
+  const searchCharacter = async ({
+    pageNumber = '',
+    search = '',
+    status = '',
+    gender = '',
+    species = '',
+  }) => {
+    const { data } = await rickAxiosApi.get<ICharacterResponse>(
+      `/character?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`
+    );
+
+    dispatch(onLoadCharacters(data));
+  };
+
   return {
     // Properties
     charactersResponse,
@@ -31,5 +45,6 @@ export const useCharactersStore = () => {
 
     // Methods
     startLoadingCharacters,
+    searchCharacter,
   };
 };

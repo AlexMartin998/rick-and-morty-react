@@ -4,7 +4,7 @@ import { Stack, Pagination } from '@mui/material';
 export interface CharacterPagingProps {}
 
 const CharacterPaging: React.FC<CharacterPagingProps> = () => {
-  const { startLoadingCharacters } = useCharactersStore();
+  const { charactersResponse, startLoadingCharacters } = useCharactersStore();
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     startLoadingCharacters(value);
@@ -12,7 +12,11 @@ const CharacterPaging: React.FC<CharacterPagingProps> = () => {
 
   return (
     <Stack spacing={2}>
-      <Pagination count={10} color="primary" onChange={handleChange} />
+      <Pagination
+        count={charactersResponse?.info?.pages}
+        color="primary"
+        onChange={handleChange}
+      />
     </Stack>
   );
 };
