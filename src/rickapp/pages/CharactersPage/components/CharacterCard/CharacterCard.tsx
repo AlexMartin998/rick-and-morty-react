@@ -1,14 +1,7 @@
+import { Box, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import {
-  Card,
-  CardActionArea,
-  CardMedia,
-  Grid,
-  Box,
-  Typography,
-  Chip,
-} from '@mui/material';
 
+import { CardImage } from '@/rickapp/shared';
 import { IResultCharacter } from '@/interfaces';
 
 export interface CharacterCardProps {
@@ -22,27 +15,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
         to={`/characters/${character.id}`}
         state={{ characterId: character.id }}
       >
-        <Card>
-          <CardActionArea>
-            <Chip
-              label={character.status}
-              color="primary"
-              sx={{
-                position: 'absolute',
-                zIndex: 99,
-                top: '10px',
-                left: '10px',
-              }}
-            />
-
-            <CardMedia
-              component="img"
-              image={character.image}
-              alt={character.name}
-              className="fadeIn"
-            />
-          </CardActionArea>
-        </Card>
+        <CardImage character={character} />
 
         <Box
           className="fadeIn"
