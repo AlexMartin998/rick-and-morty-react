@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { getEnvVariables } from '@/shared';
 import { ICharacter, ICharacterResponse } from '@/interfaces';
+import { getEnvVariables } from '../../../shared/utils/getEnvVariables';
 
 const { VITE_API_URL } = getEnvVariables();
 
@@ -18,6 +18,15 @@ export const rickApi = createApi({
       providesTags: ['Characters'],
     }),
 
+    getCharactersPaged: build.query({
+      query: ({ page }) => ({
+        url: '/character',
+        method: 'GET',
+        params: { page },
+      }),
+      providesTags: ['Characters'],
+    }),
+
     getCharacter: build.query<ICharacter, void>({
       query: id => `/character/${id}`,
       providesTags: ['Character'],
@@ -25,4 +34,8 @@ export const rickApi = createApi({
   }),
 });
 
-export const { useGetCharactersQuery, useGetCharacterQuery } = rickApi;
+export const {
+  useGetCharactersQuery,
+  useGetCharacterQuery,
+  useGetCharactersPagedQuery,
+} = rickApi;
