@@ -6,7 +6,7 @@ export interface CharacterListProps {}
 
 const CharacterList: React.FC<CharacterListProps> = () => {
   const { isLoading, data } = useGetCharactersQuery();
-  !isLoading && console.log(data);
+  if (isLoading) return <h1>Loading</h1>;
 
   return (
     <Grid container spacing={4}>

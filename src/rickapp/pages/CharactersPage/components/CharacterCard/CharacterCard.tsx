@@ -15,12 +15,13 @@ export interface CharacterCardProps {
   character: IResultCharacter;
 }
 
-const CharacterCard: React.FC<CharacterCardProps> = ({
-  character,
-}) => {
+const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Link to={`/characters/${character.id}`}>
+      <Link
+        to={`/characters/${character.id}`}
+        state={{ characterId: character.id }}
+      >
         <Card>
           <CardActionArea>
             <Chip

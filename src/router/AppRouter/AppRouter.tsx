@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { PublicLayout } from '@/layouts';
-import { CharactersPage } from '@/rickapp';
+import { CharacterPage, CharactersPage } from '@/rickapp';
 
 export interface AppRouterProps {}
 
@@ -10,6 +10,7 @@ const AppRouter: React.FC<AppRouterProps> = () => {
     <Routes>
       <Route path="/" element={<PublicLayout />}>
         <Route index element={<CharactersPage />} />
+        <Route path="characters/:id" element={<CharacterPage />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
