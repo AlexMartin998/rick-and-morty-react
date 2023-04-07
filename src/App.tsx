@@ -1,15 +1,19 @@
 import { BrowserRouter } from 'react-router-dom';
-import { AppRouter } from './router';
+import { Provider } from 'react-redux';
 
+import { AppRouter } from './router';
 import { AppTheme } from '@/themes';
+import { store } from '@/redux/store/store';
 
 function App() {
   return (
-    <AppTheme>
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
-    </AppTheme>
+    <Provider store={store}>
+      <AppTheme>
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
+      </AppTheme>
+    </Provider>
   );
 }
 

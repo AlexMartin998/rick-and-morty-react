@@ -37,6 +37,8 @@ const Navbar: React.FC<NavbarProps> = () => {
         </Box>
 
         <Box flex={1} />
+
+        
       </Toolbar>
     </AppBar>
   );
