@@ -12,6 +12,12 @@
 
 ### Running the app
 
+#### Create .env file based on .env.template
+
+```bash
+touch .env
+```
+
 #### Dev
 
 ```bash
@@ -36,8 +42,4 @@ docker run -p 8080:80 hoobak:1.0.0
 
 ## View demo
 
-<a href="https://hoobank-reactts-alx.netlify.app" target="_blank">Demo</a>
-
-### Screenshots
-
-<img src='./.screenshot/hoobank.png' />
+<a href="https://rick-morty-adrian.netlify.app" target="_blank">Demo</a>
