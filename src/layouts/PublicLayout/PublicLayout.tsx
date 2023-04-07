@@ -14,7 +14,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = () => {
       <SideMenu />
 
       <main
-        style={{ margin: '80px auto', maxWidth: '1440px', padding: '0 30px' }}
+        style={{ margin: '80px auto', maxWidth: '1440px', padding: '45px' }}
       >
         <Outlet />
       </main>
