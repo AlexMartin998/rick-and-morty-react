@@ -5,6 +5,7 @@ import { Grid } from '@mui/material';
 import { useCharactersStore } from '@/redux';
 import CharacterCard from '../CharacterCard/CharacterCard';
 import { NoCharacterFound } from '@/rickapp/shared';
+import { FullScreenLoading } from '@/shared';
 
 export interface CharacterListProps {}
 
@@ -16,7 +17,7 @@ const CharacterList: React.FC<CharacterListProps> = () => {
     startLoadingCharacters(1);
   }, []);
 
-  if (isLoadingEvents) return <h1>Loading</h1>;
+  if (isLoadingEvents) return <FullScreenLoading />;
 
   return (
     <Grid container spacing={4}>

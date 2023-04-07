@@ -1,8 +1,9 @@
-import { Box, Grid, Typography, useMediaQuery } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import { Box, Grid, Typography, useMediaQuery } from '@mui/material';
 
 import { useGetCharacterQuery } from '@/redux/store/rickApi';
 import { CardImage } from '@/rickapp/shared';
+import { FullScreenLoading } from '@/shared';
 
 export interface CharacterPageProps {}
 
@@ -13,7 +14,7 @@ const CharacterPage: React.FC<CharacterPageProps> = () => {
   );
   const isMobile = useMediaQuery('(max-width: 450px)');
 
-  if (isLoading || !character) return <h1>Loading</h1>;
+  if (isLoading || !character) return <FullScreenLoading />;
 
   return (
     <Grid container spacing={3}>
