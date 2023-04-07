@@ -10,6 +10,8 @@ const AppRouter: React.FC<AppRouterProps> = () => {
     <Routes>
       <Route path="/" element={<PublicLayout />}>
         <Route index element={<CharactersPage />} />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );
