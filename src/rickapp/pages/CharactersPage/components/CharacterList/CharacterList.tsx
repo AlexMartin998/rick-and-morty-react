@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { Grid } from '@mui/material';
 
@@ -7,15 +8,14 @@ import CharacterCard from '../CharacterCard/CharacterCard';
 export interface CharacterListProps {}
 
 const CharacterList: React.FC<CharacterListProps> = () => {
-  const { charactersResponse, isLoadingCharacters, startLoadingCharacters } =
-    useCharactersStore({ pageNumber: 1 });
+  const { charactersResponse, isLoadingEvents, startLoadingCharacters } =
+    useCharactersStore();
 
   useEffect(() => {
-    !isLoadingCharacters && startLoadingCharacters();
-  }, [isLoadingCharacters, startLoadingCharacters]);
+    startLoadingCharacters(1);
+  }, []);
 
-  if (isLoadingCharacters || !charactersResponse?.results?.length)
-    return <h1>Loading</h1>;
+  if (isLoadingEvents) return <h1>Loading</h1>;
 
   return (
     <Grid container spacing={4}>

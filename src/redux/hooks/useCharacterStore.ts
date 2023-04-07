@@ -1,33 +1,33 @@
+import { ICharacterResponse } from '@/interfaces';
+import { rickAxiosApi } from '@/shared';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { onLoadCharacters } from '../store/characters';
-import { useGetCharactersPagedQuery } from '../store/rickApi';
 import { RootState } from '../store/store';
 
-interface UseCharactersStoreProps {
-  pageNumber?: number;
-}
-
-export const useCharactersStore = ({
-  pageNumber = 1,
-}: UseCharactersStoreProps) => {
+export const useCharactersStore = () => {
   const dispatch = useDispatch();
-  const { isLoading: isLoadingCharacters, data } = useGetCharactersPagedQuery({
-    page: pageNumber,
-  });
 
-  const { charactersResponse } = useSelector(
+  const { charactersResponse, isLoadingEvents } = useSelector(
     (state: RootState) => state.characters
   );
 
-  const startLoadingCharacters = async () => {
-    dispatch(onLoadCharacters(data));
+  const startLoadingCharacters = async (page: number) => {
+    try {
+      const { data } = await rickAxiosApi.get<ICharacterResponse>(
+        `/character?page=${page}`
+      );
+
+      dispatch(onLoadCharacters(data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {
     // Properties
     charactersResponse,
-    isLoadingCharacters,
+    isLoadingEvents,
 
     // Methods
     startLoadingCharacters,
