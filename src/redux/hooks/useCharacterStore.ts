@@ -3,13 +3,13 @@ import { rickAxiosApi } from '@/shared';
 import { isAxiosError } from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { onLoadCharacters } from '../store/characters';
+import { onLoadCharacters, onSetCharacterNotFount } from '../store/characters';
 import { RootState } from '../store/store';
 
 export const useCharactersStore = () => {
   const dispatch = useDispatch();
 
-  const { charactersResponse, isLoadingEvents } = useSelector(
+  const { charactersResponse, isLoadingEvents, noCharacterFound } = useSelector(
     (state: RootState) => state.characters
   );
 
@@ -40,7 +40,8 @@ export const useCharactersStore = () => {
       dispatch(onLoadCharacters(data));
     } catch (error) {
       if (isAxiosError(error)) {
-        return dispatch(onLoadCharacters({ info: {}, results: [] }));
+        dispatch(onLoadCharacters({ info: {}, results: [] }));
+        dispatch(onSetCharacterNotFount(true));
       }
       console.log(error);
     }
@@ -50,6 +51,7 @@ export const useCharactersStore = () => {
     // Properties
     charactersResponse,
     isLoadingEvents,
+    noCharacterFound,
 
     // Methods
     startLoadingCharacters,

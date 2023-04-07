@@ -27,7 +27,7 @@ export const rickApi = createApi({
       providesTags: ['Characters'],
     }),
 
-    getCharacter: build.query<ICharacter, void>({
+    getCharacter: build.query<ICharacter, string>({
       query: id => `/character/${id}`,
       providesTags: ['Character'],
     }),

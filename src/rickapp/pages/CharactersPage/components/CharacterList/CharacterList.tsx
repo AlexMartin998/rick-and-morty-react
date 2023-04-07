@@ -1,23 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
 import { Grid } from '@mui/material';
 
 import { useCharactersStore } from '@/redux';
-import CharacterCard from '../CharacterCard/CharacterCard';
 import { NoCharacterFound } from '@/rickapp/shared';
-import { FullScreenLoading } from '@/shared';
+import CharacterCard from '../CharacterCard/CharacterCard';
 
 export interface CharacterListProps {}
 
 const CharacterList: React.FC<CharacterListProps> = () => {
-  const { charactersResponse, isLoadingEvents, startLoadingCharacters } =
-    useCharactersStore();
-
-  useEffect(() => {
-    startLoadingCharacters(1);
-  }, []);
-
-  if (isLoadingEvents) return <FullScreenLoading />;
+  const { charactersResponse } = useCharactersStore();
 
   return (
     <Grid container spacing={4}>

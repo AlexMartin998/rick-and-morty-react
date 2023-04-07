@@ -1,20 +1,19 @@
-import { useLocation } from 'react-router-dom';
 import { Box, Grid, Typography, useMediaQuery } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 import { useGetCharacterQuery } from '@/redux/store/rickApi';
-import { CardImage } from '@/rickapp/shared';
+import { CardImage, NoCharacterFound } from '@/rickapp/shared';
 import { FullScreenLoading } from '@/shared';
 
 export interface CharacterPageProps {}
 
 const CharacterPage: React.FC<CharacterPageProps> = () => {
-  const { state } = useLocation();
-  const { isLoading, data: character } = useGetCharacterQuery(
-    state.characterId
-  );
+  const { id = '1' } = useParams();
+  const { isLoading, data: character } = useGetCharacterQuery(id);
   const isMobile = useMediaQuery('(max-width: 450px)');
 
-  if (isLoading || !character) return <FullScreenLoading />;
+  if (isLoading) return <FullScreenLoading />;
+  if (!character) return <NoCharacterFound />;
 
   return (
     <Grid container spacing={3}>
