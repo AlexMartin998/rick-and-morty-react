@@ -1,9 +1,14 @@
+import { BrowserRouter } from 'react-router-dom';
+import { AppRouter } from './router';
+
 import { AppTheme } from '@/themes';
 
 function App() {
   return (
     <AppTheme>
-      <h1>Hello World</h1>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </AppTheme>
   );
 }

@@ -1,8 +1,8 @@
-export interface PublicLayoutProps {
-  children: React.ReactNode;
-}
+import { Outlet } from 'react-router-dom';
 
-const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
+export interface PublicLayoutProps {}
+
+const PublicLayout: React.FC<PublicLayoutProps> = () => {
   return (
     <>
       <nav>{/* <Navbar /> */}</nav>
@@ -10,7 +10,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
       <main
         style={{ margin: '80px auto', maxWidth: '1440px', padding: '0 30px' }}
       >
-        {children}
+        <Outlet />
       </main>
 
       <footer></footer>
