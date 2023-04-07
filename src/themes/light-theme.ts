@@ -40,12 +40,16 @@ export const lightTheme = createTheme({
           fontWeight: 600,
         },
         h2: {
-          fontSize: 20,
+          fontSize: 21,
           fontWeight: 400,
         },
         subtitle1: {
-          fontSize: 17,
+          fontSize: 18,
           fontWeight: 600,
+        },
+        body1: {
+          fontSize: 17,
+          fontWeight: 400,
         },
       },
     },

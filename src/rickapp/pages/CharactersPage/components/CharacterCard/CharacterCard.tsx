@@ -35,7 +35,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 
           <Box>
             <Typography variant="subtitle1" fontWeight={400}>
-              Last Location: {character.location.name}
+              <span style={{ fontSize: '17px' }}>Last Location:</span>{' '}
+              {character.location.name}
             </Typography>
           </Box>
         </Box>
