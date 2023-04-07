@@ -1,5 +1,6 @@
 import { ICharacterResponse } from '@/interfaces';
 import { rickAxiosApi } from '@/shared';
+import { isAxiosError } from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { onLoadCharacters } from '../store/characters';
@@ -31,11 +32,18 @@ export const useCharactersStore = () => {
     gender = '',
     species = '',
   }) => {
-    const { data } = await rickAxiosApi.get<ICharacterResponse>(
-      `/character?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`
-    );
+    try {
+      const { data } = await rickAxiosApi.get<ICharacterResponse>(
+        `/character?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`
+      );
 
-    dispatch(onLoadCharacters(data));
+      dispatch(onLoadCharacters(data));
+    } catch (error) {
+      if (isAxiosError(error)) {
+        return dispatch(onLoadCharacters({ info: {}, results: [] }));
+      }
+      console.log(error);
+    }
   };
 
   return {

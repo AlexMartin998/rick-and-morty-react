@@ -4,6 +4,7 @@ import { Grid } from '@mui/material';
 
 import { useCharactersStore } from '@/redux';
 import CharacterCard from '../CharacterCard/CharacterCard';
+import { NoCharacterFound } from '@/rickapp/shared';
 
 export interface CharacterListProps {}
 
@@ -19,9 +20,15 @@ const CharacterList: React.FC<CharacterListProps> = () => {
 
   return (
     <Grid container spacing={4}>
-      {charactersResponse.results.map(character => (
-        <CharacterCard key={character.id} character={character} />
-      ))}
+      {charactersResponse.results.length ? (
+        <>
+          {charactersResponse.results.map(character => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
+        </>
+      ) : (
+        <NoCharacterFound />
+      )}
     </Grid>
   );
 };
